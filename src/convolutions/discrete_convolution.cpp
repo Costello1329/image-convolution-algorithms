@@ -3,10 +3,10 @@
 #include <cstddef>
 #include <cmath>
 
-#include "../core/utility.h"
-#include "../core/types.h"
+#include "../core/utility.hpp"
+#include "../core/types.hpp"
 
-#include "discrete_convolution.h"
+#include "discrete_convolution.hpp"
 
 
 double integrate (

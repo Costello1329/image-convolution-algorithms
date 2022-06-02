@@ -5,10 +5,10 @@
 #include <string>
 #include <chrono>
 
-#include "convolutions/recursive_convolution.h"
-#include "convolutions/discrete_convolution.h"
-#include "core/convolution.h"
-#include "core/types.h"
+#include "convolutions/recursive_convolution.hpp"
+#include "convolutions/discrete_convolution.hpp"
+#include "core/convolution.hpp"
+#include "core/types.hpp"
 
 
 convolution_t get_deriche_convolution (const gaussian_parameters_t& parameters) {

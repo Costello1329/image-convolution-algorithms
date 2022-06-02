@@ -2,7 +2,7 @@
 #include <utility>
 #include <cstddef>
 
-#include "utility.h"
+#include "utility.hpp"
 
 
 std::pair<std::size_t, std::size_t> get_split_vector_block (

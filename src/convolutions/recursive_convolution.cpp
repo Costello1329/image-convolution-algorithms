@@ -2,10 +2,10 @@
 #include <numbers>
 #include <cmath>
 
-#include "../core/types.h"
-#include "../core/utility.h"
+#include "../core/types.hpp"
+#include "../core/utility.hpp"
 
-#include "recursive_convolution.h"
+#include "recursive_convolution.hpp"
 
 
 sequence_t recursive_convolution (

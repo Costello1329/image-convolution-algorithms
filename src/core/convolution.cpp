@@ -7,9 +7,9 @@
 #include <vector>
 #include <thread>
 
-#include "convolution.h"
+#include "convolution.hpp"
 
-#include "utility.h"
+#include "utility.hpp"
 
 
 cv::Mat convolve_one_axis (const cv::Mat& initial, const convolution_t& convolution, const bool horizontal_axis) {

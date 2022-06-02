@@ -1,11 +1,11 @@
-#ifndef IMAGE_CONVOLUTIONS_ALGORITHMS_CONVOLUTIONS_RECURSIVE_CONVOLUTION_H
-#define IMAGE_CONVOLUTIONS_ALGORITHMS_CONVOLUTIONS_RECURSIVE_CONVOLUTION_H
+#ifndef IMAGE_CONVOLUTIONS_ALGORITHMS_CONVOLUTIONS_RECURSIVE_CONVOLUTION_HPP
+#define IMAGE_CONVOLUTIONS_ALGORITHMS_CONVOLUTIONS_RECURSIVE_CONVOLUTION_HPP
 
 #include <utility>
 #include <vector>
 #include <array>
 
-#include "../core/types.h"
+#include "../core/types.hpp"
 
 
 typedef std::vector<std::array<double, 2>> causal_coefficients_t;
@@ -28,4 +28,4 @@ gaussian_parameters_t gaussian_fourth_order (double sigma);
 gaussian_parameters_t gaussian_second_order (double sigma);
 
 
-#endif /// IMAGE_CONVOLUTIONS_ALGORITHMS_CONVOLUTIONS_RECURSIVE_CONVOLUTION_H.
+#endif /// IMAGE_CONVOLUTIONS_ALGORITHMS_CONVOLUTIONS_RECURSIVE_CONVOLUTION_HPP.
