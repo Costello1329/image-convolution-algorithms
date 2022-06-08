@@ -1,4 +1,6 @@
 #include <functional>
+#include <algorithm>
+#include <numeric>
 #include <numbers>
 #include <cstddef>
 #include <cmath>
@@ -9,25 +11,7 @@
 #include "discrete_convolution.hpp"
 
 
-double integrate (
-    const std::function<double(double)>& func,
-    const double l,
-    const double r,
-    const std::size_t iterations_count
-) {
-    double res = 0.;
-
-    for (std::size_t i = 0; i < iterations_count; i ++) {
-        res += func(l + static_cast<double>(i) / static_cast<double>(iterations_count) * (r - l));
-        res += func(l + static_cast<double>(i + 1) / static_cast<double>(iterations_count) * (r - l));
-    }
-
-    return res * (r - l) / static_cast<double>(iterations_count) / 2.;
-}
-
-sequence_t build_kernel (const double sigma) {
-    static constinit std::size_t total_iterations_count = 1000000;
-
+sequence_t gaussian_kernel (const double sigma) {
     std::function<double(double)> normal_distribution =
         [sigma] (const double x) -> double {
             return 1. / std::sqrt(2 * std::numbers::pi) / sigma * exp(- 1. / 2. * std::pow(x / sigma, 2.));
@@ -37,13 +21,19 @@ sequence_t build_kernel (const double sigma) {
     const std::size_t length = half_length * 2 + 1;
     sequence_t kernel(length);
 
-    for (std::size_t i = 0; i <= half_length; i ++) {
-        const double l = - static_cast<double>(length) / 2. + static_cast<double>(i);
-        const double r = l + 1.;
-        kernel[length - 1 - i] = kernel[i] = integrate(normal_distribution, l, r, total_iterations_count / half_length);
-    }
+    for (std::size_t i = 0; i <= half_length; i ++)
+        kernel[half_length - i] = kernel[half_length + i] = normal_distribution(static_cast<double>(i));
 
-    return kernel;
+    const double norm = std::accumulate(kernel.cbegin(), kernel.cend(), 0.);
+    sequence_t normalised_kernel;
+    normalised_kernel.reserve(length);
+    std::transform(
+        kernel.cbegin(),
+        kernel.cend(),
+        std::back_inserter(normalised_kernel),
+        [norm] (const double el) { return el / norm; }
+    );
+    return normalised_kernel;
 }
 
 sequence_t discrete_convolution (const sequence_t& sequence, const sequence_t& kernel) {
@@ -54,4 +44,10 @@ sequence_t discrete_convolution (const sequence_t& sequence, const sequence_t& k
             res[i] += at_with_default(sequence, i + j - kernel.size() / 2) * kernel[j];
 
     return res;
+}
+
+convolution_t get_discrete_convolution (const sequence_t& kernel) {
+    return [kernel] (const sequence_t& sequence) -> sequence_t {
+        return discrete_convolution(sequence, kernel);
+    };
 }

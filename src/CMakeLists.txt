@@ -18,6 +18,6 @@ add_executable(
     core/convolution.hpp core/convolution.cpp
     core/utility.hpp core/utility.cpp
     core/types.hpp
-)
+        demo/convolution_demo.cpp demo/convolution_demo.hpp demo/delta_function_demo.cpp demo/delta_function_demo.hpp convolutions/deriche_convolution.cpp convolutions/deriche_convolution.hpp demo/convolution_io.cpp demo/convolution_io.hpp)
 
 target_link_libraries(image_convolutions_algorithms ${OpenCV_LIBS})

@@ -4,8 +4,8 @@
 #include "../core/types.hpp"
 
 
-sequence_t build_kernel (double sigma);
-sequence_t discrete_convolution (const sequence_t& sequence, const sequence_t& kernel);
+sequence_t gaussian_kernel (double sigma);
+convolution_t get_discrete_convolution (const sequence_t& sequence);
 
 
 #endif /// IMAGE_CONVOLUTIONS_ALGORITHMS_DISCRETE_CONVOLUTION_HPP.
