@@ -49,8 +49,8 @@ non_causal_coefficients_t get_non_causal_coefficients (
     for (std::size_t i = 0; i < depth; i ++) {
         const auto [n_i, d_i] = causal_coefficients[i];
         const double n_0 = causal_coefficients[0][0];
-        const double n_i1 = (i < depth - 1 ? causal_coefficients[i + 1][0] : 0.);
-        const double m_i = (is_symmetric ? 1. : -1.) * (n_i1 - d_i * n_0);
+        const double n_i_next = (i < depth - 1 ? causal_coefficients[i + 1][0] : 0.);
+        const double m_i = (is_symmetric ? 1. : -1.) * (n_i_next - d_i * n_0);
         result.push_back({ n_i, m_i, d_i });
     }
 
